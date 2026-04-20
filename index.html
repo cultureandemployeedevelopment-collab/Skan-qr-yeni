@@ -21,12 +21,10 @@
 
     .container{max-width:680px;margin:0 auto;padding:14px;}
 
-    /* TABS */
     .tabs{display:flex;gap:6px;margin-bottom:14px;background:rgba(255,255,255,.04);padding:5px;border-radius:14px;border:1px solid rgba(255,255,255,.07);}
     .tab{flex:1;padding:9px;border-radius:10px;border:none;cursor:pointer;font-weight:800;font-size:.85em;transition:all 200ms;background:none;color:rgba(230,237,243,.55);}
     .tab.active{background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;box-shadow:0 4px 12px rgba(59,130,246,.3);}
 
-    /* SCANNER */
     .scanner-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:14px;margin-bottom:14px;}
     #reader{width:100%;border-radius:14px;overflow:hidden;}
     .status{text-align:center;padding:11px;margin-top:10px;border-radius:12px;font-weight:700;font-size:.9em;transition:all 200ms;}
@@ -36,12 +34,10 @@
     .status-warning {background:rgba(251,146,60,.12);color:#fb923c;border:1px solid rgba(251,146,60,.25);}
     .status-error   {background:rgba(248,113,113,.12);color:#f87171;border:1px solid rgba(248,113,113,.25);}
 
-    /* HISTORY (sheet-dən) */
     .history-panel{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;overflow:hidden;}
     .history-header{padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
     .history-title{font-weight:800;font-size:.95em;}
 
-    /* FİLTR */
     .filter-row{display:flex;gap:6px;flex-wrap:wrap;}
     .filter-btn{padding:5px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:rgba(230,237,243,.7);font-size:.78em;font-weight:700;cursor:pointer;transition:all 150ms;}
     .filter-btn.active{background:rgba(59,130,246,.25);border-color:rgba(59,130,246,.5);color:#60a5fa;}
@@ -52,14 +48,12 @@
     .btn-load{padding:7px 14px;border-radius:10px;border:none;background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;font-weight:800;font-size:.82em;cursor:pointer;}
     .btn-load:disabled{opacity:.55;cursor:not-allowed;}
 
-    /* STATS ROW */
     .stats-row{display:flex;gap:8px;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.07);flex-wrap:wrap;}
     .stat-chip{display:flex;flex-direction:column;align-items:center;padding:8px 14px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);min-width:68px;}
     .stat-num{font-size:1.3em;font-weight:900;}
     .stat-label{font-size:.7em;color:rgba(230,237,243,.5);font-weight:700;margin-top:2px;}
     .stat-chip.green .stat-num{color:#4ade80;}
     .stat-chip.orange .stat-num{color:#fb923c;}
-    .stat-chip.red .stat-num{color:#f87171;}
     .stat-chip.blue .stat-num{color:#60a5fa;}
 
     .scan-list{max-height:420px;overflow-y:auto;}
@@ -81,6 +75,15 @@
     .spinner{display:inline-block;width:20px;height:20px;border:2px solid rgba(255,255,255,.1);border-top-color:rgba(59,130,246,.7);border-radius:50%;animation:spin 700ms linear infinite;vertical-align:middle;margin-right:6px;}
     @keyframes spin{to{transform:rotate(360deg)}}
 
+    /* CİHAZ BLOK / GÖZLƏMƏ EKRANI */
+    .device-screen{display:none;position:fixed;inset:0;background:#0d1117;z-index:9999;flex-direction:column;align-items:center;justify-content:center;padding:30px;text-align:center;}
+    .device-screen.show{display:flex;}
+    .device-screen-icon{font-size:72px;margin-bottom:20px;}
+    .device-screen-title{font-size:1.4em;font-weight:900;margin-bottom:12px;}
+    .device-screen-msg{color:rgba(230,237,243,.55);font-size:.9em;line-height:1.7;font-weight:600;max-width:320px;}
+    .device-screen-id{margin-top:18px;padding:10px 18px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);font-family:monospace;font-size:.82em;color:#60a5fa;font-weight:700;word-break:break-all;}
+    .device-retry-btn{margin-top:18px;padding:11px 24px;border-radius:12px;border:none;background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;font-weight:800;cursor:pointer;font-size:.9em;}
+
     /* OVERLAY */
     .result-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:1000;justify-content:center;align-items:center;padding:20px;}
     .result-card{background:linear-gradient(180deg,#161b27,#111827);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:26px;width:100%;max-width:400px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.6);}
@@ -90,11 +93,8 @@
     .result-error   .result-icon{background:rgba(248,113,113,.15);color:#f87171;border:2px solid rgba(248,113,113,.25);}
     .result-confirm .result-icon{background:rgba(59,130,246,.15);color:#60a5fa;border:2px solid rgba(59,130,246,.25);}
     .result-title{font-size:1.25em;font-weight:900;margin-bottom:10px;}
-
-    /* Əməkdaş adı — böyük, mərkəzdə */
     .result-emp-name{font-size:1.35em;font-weight:900;color:#e6edf3;margin-bottom:4px;letter-spacing:.2px;}
     .result-emp-id{font-size:.82em;color:rgba(230,237,243,.45);font-weight:700;margin-bottom:14px;}
-
     .result-details{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px;margin-bottom:14px;text-align:left;}
     .detail-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.06);}
     .detail-row:last-child{border-bottom:none;}
@@ -102,29 +102,19 @@
     .detail-value{color:#e6edf3;font-weight:700;font-size:.9em;}
     .btn{border:none;border-radius:13px;padding:12px 14px;font-weight:800;cursor:pointer;width:100%;transition:all 180ms;}
     .btn-confirm{background:linear-gradient(135deg,#166534,#22c55e);color:#fff;margin-top:10px;}
-    .btn-confirm:hover{filter:brightness(1.1);}
     .btn-close{background:rgba(255,255,255,.08);color:#e6edf3;border:1px solid rgba(255,255,255,.12);margin-top:8px;}
-    .btn-close:hover{background:rgba(255,255,255,.12);}
     .countdown{font-size:2em;font-weight:900;margin-top:12px;}
     .countdown-success{color:#4ade80;}
     .countdown-warning{color:#fb923c;}
     .countdown-error  {color:#f87171;}
     .countdown-text{color:rgba(230,237,243,.4);font-size:.82em;margin-top:4px;}
-
-    /* IP BLOK EKRANI */
-    .ip-block{display:none;position:fixed;inset:0;background:#0d1117;z-index:9999;flex-direction:column;align-items:center;justify-content:center;padding:30px;text-align:center;}
-    .ip-block.show{display:flex;}
-    .ip-block-icon{font-size:64px;margin-bottom:20px;}
-    .ip-block-title{font-size:1.4em;font-weight:900;color:#f87171;margin-bottom:12px;}
-    .ip-block-msg{color:rgba(230,237,243,.55);font-size:.9em;line-height:1.6;font-weight:600;}
-    .ip-block-code{margin-top:16px;padding:10px 18px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);font-family:monospace;font-size:.95em;color:#60a5fa;font-weight:700;}
   </style>
 </head>
 <body>
 
 <div class="header">
   <h1>🍽️ GHG Yemək Skaner</h1>
-  <span class="header-badge" id="liveStatus">● Hazır</span>
+  <span class="header-badge" id="liveStatus">● Yoxlanılır...</span>
 </div>
 
 <div class="container">
@@ -133,14 +123,11 @@
     <button class="tab" onclick="switchTab('history')">📋 Skan Tarixi</button>
   </div>
 
-  <!-- SKANER PANELİ -->
   <div id="scannerTab">
     <div class="scanner-box">
       <div id="reader"></div>
       <div class="status status-waiting" id="status">QR kod gözlənilir...</div>
     </div>
-
-    <!-- Son 10 skan (RAM) -->
     <div class="history-panel">
       <div class="history-header">
         <span class="history-title">🕐 Son skanlar (bu sessiya)</span>
@@ -151,7 +138,6 @@
     </div>
   </div>
 
-  <!-- TARİX PANELİ (Sheet-dən) -->
   <div id="historyTab" style="display:none;">
     <div class="history-panel">
       <div class="history-header">
@@ -162,31 +148,45 @@
           <button class="filter-btn" onclick="setFilter('custom')">Diapazon</button>
         </div>
       </div>
-
       <div class="date-inputs" id="customDateRow" style="display:none;">
         <label>Başlanğıc:</label>
         <input type="date" id="dateFrom" />
         <label>Son:</label>
         <input type="date" id="dateTo" />
       </div>
-
       <div style="padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
         <button class="btn-load" id="loadBtn" onclick="loadHistory()">🔄 Yüklə</button>
         <div style="font-size:.78em;color:rgba(230,237,243,.35);font-weight:700;" id="lastLoadInfo"></div>
       </div>
-
       <div class="stats-row" id="statsRow" style="display:none;">
         <div class="stat-chip green"><span class="stat-num" id="statSuccess">0</span><span class="stat-label">Təsdiqləndi</span></div>
         <div class="stat-chip blue"><span class="stat-num" id="statConfirm">0</span><span class="stat-label">Təsdiq</span></div>
         <div class="stat-chip orange"><span class="stat-num" id="statDup">0</span><span class="stat-label">Təkrar</span></div>
         <div class="stat-chip blue"><span class="stat-num" id="statTotal">0</span><span class="stat-label">Ümumi</span></div>
       </div>
-
       <div class="scan-list" id="historyList">
         <div class="empty-state">Yükləmək üçün "Yüklə" düyməsinə basın</div>
       </div>
     </div>
   </div>
+</div>
+
+<!-- CİHAZ BLOK EKRANI -->
+<div class="device-screen" id="deviceBlocked">
+  <div class="device-screen-icon">🚫</div>
+  <div class="device-screen-title" style="color:#f87171;">Giriş icazəniz yoxdur!</div>
+  <div class="device-screen-msg">Bu cihaz icazəli cihazlar siyahısında deyil.<br>Zəhmət olmasa sistem administratoruna müraciət edin.</div>
+  <div class="device-screen-id" id="blockedDeviceId"></div>
+  <button class="device-retry-btn" onclick="retryDeviceCheck()">🔄 Yenidən yoxla</button>
+</div>
+
+<!-- CİHAZ GÖZLƏMƏ EKRANI -->
+<div class="device-screen" id="devicePending">
+  <div class="device-screen-icon">⏳</div>
+  <div class="device-screen-title" style="color:#fb923c;">İcazə gözlənilir</div>
+  <div class="device-screen-msg">Cihazınız qeydiyyata alındı.<br>Administrator icazə verdikdən sonra skaner işləyəcək.<br><br>Cihaz ID-ni administratora göndərin:</div>
+  <div class="device-screen-id" id="pendingDeviceId"></div>
+  <button class="device-retry-btn" onclick="retryDeviceCheck()">🔄 İcazəni yoxla</button>
 </div>
 
 <!-- RESULT OVERLAY -->
@@ -208,125 +208,215 @@
 </div>
 
 <script>
-  const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbzmnQcRDddGfudooYGckg8qMJDudaOp6hOSxsjIzNV5Z8HUpHFRsLimmnvwuBTn85gm/exec';
+  const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbynv3_d0slfCgpIn9XUZyBVq9UOUBmfJR0dWjuKz5FmvWjzL09nHycktjrBW83_DrYL/exec';
 
   const COUNTDOWN_SECONDS = 5;
-
-  // ────────────────────────────────────────────────
-  // DÜZƏLTMƏ: Cooldown artırıldı + server cavabı
-  // gələnə qədər QR bloklanır (isProcessing yox,
-  // lastQrText + uzun cooldown istifadə edilir)
-  // ────────────────────────────────────────────────
-  const QR_BLOCK_MS = 4000; // server cavabı + ehtiyat margin
-
+  const QR_BLOCK_MS = 4000;
   const DRY_TTL_MS = 24 * 60 * 60 * 1000;
+  const SCAN_STORAGE_KEY = 'ghg_scan_history';
+  const DEVICE_ID_KEY = 'ghg_device_id';
 
   let isProcessing = false;
   let scanHistory = [];
   let html5QrCode = null;
   let countdownInterval = null;
-
   let pendingConfirmToken = null;
   let pendingConfirmQrData = null;
   let pendingConfirmMeta = null;
-
-  // ────────────────────────────────────────────────
-  // ƏSAS DÜZƏLTMƏ: lastQrText + lastQrAt ilə
-  // server cavabı gələnə qədər HEÇ BİR scan qəbul
-  // edilmir. QR_BLOCK_MS = 4000ms
-  // ────────────────────────────────────────────────
   let lastQrText = '';
   let lastQrAt = 0;
-
   const dryCountMap = new Map();
-
-  // Tab
   let currentTab = 'scanner';
   let currentFilter = 'today';
 
-  function switchTab(tab){
+  // ── CİHAZ ID ──────────────────────────────────────
+  function generateDeviceId() {
+    const nav = window.navigator;
+    const screen = window.screen;
+    const raw = [
+      nav.userAgent,
+      nav.language,
+      screen.width + 'x' + screen.height,
+      screen.colorDepth,
+      new Date().getTimezoneOffset(),
+      nav.hardwareConcurrency || '',
+      nav.platform || ''
+    ].join('|');
+
+    let hash = 0;
+    for (let i = 0; i < raw.length; i++) {
+      hash = ((hash << 5) - hash) + raw.charCodeAt(i);
+      hash |= 0;
+    }
+    return 'DEV' + Math.abs(hash).toString(16).toUpperCase().padStart(8, '0');
+  }
+
+  function getDeviceId() {
+    let id = localStorage.getItem(DEVICE_ID_KEY);
+    if (!id) {
+      id = generateDeviceId();
+      localStorage.setItem(DEVICE_ID_KEY, id);
+    }
+    return id;
+  }
+
+  function getDeviceInfo() {
+    const ua = navigator.userAgent;
+    let os = 'Naməlum';
+    if (/android/i.test(ua)) os = 'Android';
+    else if (/iphone|ipad/i.test(ua)) os = 'iOS';
+    else if (/windows/i.test(ua)) os = 'Windows';
+    else if (/mac/i.test(ua)) os = 'Mac';
+
+    let browser = 'Naməlum';
+    if (/chrome/i.test(ua) && !/edge/i.test(ua)) browser = 'Chrome';
+    else if (/safari/i.test(ua)) browser = 'Safari';
+    else if (/firefox/i.test(ua)) browser = 'Firefox';
+    else if (/edge/i.test(ua)) browser = 'Edge';
+
+    return os + '/' + browser + ' ' + screen.width + 'x' + screen.height;
+  }
+
+  // ── CİHAZ YOXLAMA ─────────────────────────────────
+  async function checkDeviceAccess() {
+    const deviceId = getDeviceId();
+    const deviceInfo = getDeviceInfo();
+
+    try {
+      const res = await fetchJSONP(
+        SHEET_API_URL + '?action=checkDevice&deviceId=' + encodeURIComponent(deviceId),
+        { timeoutMs: 10000, retry: 1 }
+      );
+
+      if (res && res.status === 'allowed') {
+        // İcazə var → skaner işləsin
+        startApp();
+        return;
+      }
+
+      if (res && res.status === 'notfound') {
+        // İlk dəfə → qeydiyyat et
+        await fetchJSONP(
+          SHEET_API_URL + '?action=registerDevice&deviceId=' + encodeURIComponent(deviceId) + '&deviceInfo=' + encodeURIComponent(deviceInfo),
+          { timeoutMs: 10000, retry: 1 }
+        );
+        showPendingScreen(deviceId);
+        return;
+      }
+
+      if (res && res.status === 'pending' || res && res.status === 'exists') {
+        showPendingScreen(deviceId);
+        return;
+      }
+
+      // API xətası → ehtiyatlı tərəfdən icazə ver
+      startApp();
+
+    } catch(e) {
+      // Şəbəkə xətası → icazə ver
+      startApp();
+    }
+  }
+
+  function showPendingScreen(deviceId) {
+    document.getElementById('pendingDeviceId').textContent = 'Cihaz ID: ' + deviceId;
+    document.getElementById('devicePending').classList.add('show');
+    updateStatus('waiting', 'İcazə gözlənilir...');
+  }
+
+  function showBlockedScreen(deviceId) {
+    document.getElementById('blockedDeviceId').textContent = 'Cihaz ID: ' + deviceId;
+    document.getElementById('deviceBlocked').classList.add('show');
+    updateStatus('error', 'Giriş qadağandır');
+  }
+
+  async function retryDeviceCheck() {
+    document.getElementById('devicePending').classList.remove('show');
+    document.getElementById('deviceBlocked').classList.remove('show');
+    await checkDeviceAccess();
+  }
+
+  function startApp() {
+    document.getElementById('devicePending').classList.remove('show');
+    document.getElementById('deviceBlocked').classList.remove('show');
+    loadScanHistory();
+    renderScanList();
+    startCamera();
+    updateStatus('waiting', 'QR kod gözlənilir...');
+  }
+
+  // ── TAB ───────────────────────────────────────────
+  function switchTab(tab) {
     currentTab = tab;
     document.getElementById('scannerTab').style.display = tab === 'scanner' ? 'block' : 'none';
     document.getElementById('historyTab').style.display = tab === 'history' ? 'block' : 'none';
-    document.querySelectorAll('.tab').forEach((t,i)=>{
-      t.classList.toggle('active', (i===0 && tab==='scanner') || (i===1 && tab==='history'));
+    document.querySelectorAll('.tab').forEach((t, i) => {
+      t.classList.toggle('active', (i === 0 && tab === 'scanner') || (i === 1 && tab === 'history'));
     });
     if (tab === 'history') initHistoryDates();
   }
 
-  function setFilter(f){
+  function setFilter(f) {
     currentFilter = f;
-    document.querySelectorAll('.filter-btn').forEach(b=>{
+    document.querySelectorAll('.filter-btn').forEach(b => {
       b.classList.toggle('active', b.textContent.includes(
-        f==='today' ? 'Bu gün' : f==='month' ? 'Bu ay' : 'Diapazon'
+        f === 'today' ? 'Bu gün' : f === 'month' ? 'Bu ay' : 'Diapazon'
       ));
     });
-    document.getElementById('customDateRow').style.display = f==='custom' ? 'flex' : 'none';
+    document.getElementById('customDateRow').style.display = f === 'custom' ? 'flex' : 'none';
     if (f !== 'custom') loadHistory();
   }
 
-  function initHistoryDates(){
+  function initHistoryDates() {
     const today = localDateStr(new Date());
     document.getElementById('dateFrom').value = today;
     document.getElementById('dateTo').value = today;
   }
 
-  function localDateStr(d){
-    const y = d.getFullYear();
-    const m = String(d.getMonth()+1).padStart(2,'0');
-    const dd = String(d.getDate()).padStart(2,'0');
-    return `${y}-${m}-${dd}`;
+  function localDateStr(d) {
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
   }
 
-  // dd.MM.yyyy -> yyyy-MM-dd
-  function azToIso(s){
-    if (!s) return '';
-    const p = s.split('.');
-    if (p.length !== 3) return s;
-    return `${p[2]}-${p[1]}-${p[0]}`;
-  }
-
-  function isoToAz(s){
+  function isoToAz(s) {
     if (!s) return '';
     const p = s.split('-');
     if (p.length !== 3) return s;
-    return `${p[2]}.${p[1]}.${p[0]}`;
+    return p[2] + '.' + p[1] + '.' + p[0];
   }
 
-  async function loadHistory(){
+  async function loadHistory() {
     const btn = document.getElementById('loadBtn');
     btn.disabled = true;
     btn.textContent = '⏳ Yüklənir...';
     document.getElementById('historyList').innerHTML = '<div class="loading-state"><span class="spinner"></span>Məlumat yüklənir...</div>';
     document.getElementById('statsRow').style.display = 'none';
 
-    try{
+    try {
       let from = '', to = '';
       const now = new Date();
-
-      if (currentFilter === 'today'){
+      if (currentFilter === 'today') {
         from = to = isoToAz(localDateStr(now));
-      } else if (currentFilter === 'month'){
-        const firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
-        from = isoToAz(localDateStr(firstDay));
+      } else if (currentFilter === 'month') {
+        from = isoToAz(localDateStr(new Date(now.getFullYear(), now.getMonth(), 1)));
         to   = isoToAz(localDateStr(now));
       } else {
         from = isoToAz(document.getElementById('dateFrom').value);
         to   = isoToAz(document.getElementById('dateTo').value);
       }
 
-      const url = `${SHEET_API_URL}?action=getScanHistory&from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`;
-      const res = await fetchJSONP(url, {timeoutMs:15000, retry:1});
+      const res = await fetchJSONP(
+        SHEET_API_URL + '?action=getScanHistory&from=' + encodeURIComponent(from) + '&to=' + encodeURIComponent(to),
+        { timeoutMs: 15000, retry: 1 }
+      );
 
-      if (res.status !== 'success' || !Array.isArray(res.data)){
-        document.getElementById('historyList').innerHTML = '<div class="empty-state">❌ Məlumat yüklənmədi: ' + (res.message||'xəta') + '</div>';
+      if (res.status !== 'success' || !Array.isArray(res.data)) {
+        document.getElementById('historyList').innerHTML = '<div class="empty-state">❌ ' + (res.message || 'Xəta') + '</div>';
         return;
       }
 
-      renderHistory(res.data, from, to);
+      renderHistory(res.data);
       document.getElementById('lastLoadInfo').textContent = 'Son yükləmə: ' + new Date().toLocaleTimeString('az-AZ');
-
-    } catch(e){
+    } catch(e) {
       document.getElementById('historyList').innerHTML = '<div class="empty-state">❌ Serverə qoşulmadı</div>';
     } finally {
       btn.disabled = false;
@@ -334,451 +424,376 @@
     }
   }
 
-  function safeStr(val){
-    // Google Sheets bəzən tarix/saat sütunlarını Date object kimi qaytarır
-    // Bunu düzgün formata çeviririk
+  function safeStr(val) {
     if (!val && val !== 0) return '';
     if (typeof val === 'string') return val.trim();
-    if (val instanceof Date){
-      // Yalnız saat üçün: HH:mm
-      const h = String(val.getHours()).padStart(2,'0');
-      const m = String(val.getMinutes()).padStart(2,'0');
+    if (val instanceof Date) {
+      const h = String(val.getHours()).padStart(2, '0');
+      const m = String(val.getMinutes()).padStart(2, '0');
       return h + ':' + m;
     }
     return String(val).trim();
   }
 
-  function renderHistory(rows, from, to){
-    // Stat hesabla
-    let success=0, confirmed=0, dup=0;
-    rows.forEach(r=>{
-      const st = String(r.status||'').trim();
-      if (st==='Təsdiqləndi') success++;
-      else if (st==='Təsdiq') confirmed++;
-      else if (st==='Təkrar cəhd') dup++;
+  function renderHistory(rows) {
+    let success = 0, confirmed = 0, dup = 0;
+    rows.forEach(r => {
+      const st = String(r.status || '').trim();
+      if (st === 'Təsdiqləndi') success++;
+      else if (st === 'Təsdiq') confirmed++;
+      else if (st === 'Təkrar cəhd') dup++;
     });
-
     document.getElementById('statSuccess').textContent = success;
     document.getElementById('statConfirm').textContent = confirmed;
     document.getElementById('statDup').textContent = dup;
     document.getElementById('statTotal').textContent = rows.length;
     document.getElementById('statsRow').style.display = 'flex';
 
-    if (!rows.length){
+    if (!rows.length) {
       document.getElementById('historyList').innerHTML = '<div class="empty-state">Bu tarix aralığında skan yoxdur</div>';
       return;
     }
 
-    // Sırala: ən son əvvəl
-    rows.sort((a,b)=>{
-      const da = (a.date||'') + ' ' + (a.time||'');
-      const db = (b.date||'') + ' ' + (b.time||'');
+    rows.sort((a, b) => {
+      const da = (a.date || '') + ' ' + (a.time || '');
+      const db = (b.date || '') + ' ' + (b.time || '');
       return db.localeCompare(da);
     });
 
-    document.getElementById('historyList').innerHTML = rows.map(r=>{
-      const st = String(r.status||'').trim();
-      let cls='ok', icon='✓';
-      if (st==='Təkrar cəhd'){ cls='warn'; icon='⚠'; }
-      else if (st==='Xəta'){ cls='err'; icon='✕'; }
-      else if (st==='Təsdiq'){ cls='conf'; icon='✔'; }
-
-      const timeStr = safeStr(r.time);
-      const dateStr = String(r.date||'').trim();
+    document.getElementById('historyList').innerHTML = rows.map(r => {
+      const st = String(r.status || '').trim();
+      let cls = 'ok', icon = '✓';
+      if (st === 'Təkrar cəhd') { cls = 'warn'; icon = '⚠'; }
+      else if (st === 'Xəta') { cls = 'err'; icon = '✕'; }
+      else if (st === 'Təsdiq') { cls = 'conf'; icon = '✔'; }
 
       return `<div class="scan-item">
         <div class="scan-icon ${cls}">${icon}</div>
         <div class="scan-info">
-          <div class="scan-name">${r.fullName||'-'}</div>
-          <div class="scan-detail">#${r.empId||'-'} · ${r.ticketName||'-'}</div>
+          <div class="scan-name">${r.fullName || '-'}</div>
+          <div class="scan-detail">#${r.empId || '-'} · ${r.ticketName || '-'}</div>
           <div class="scan-detail" style="margin-top:2px;color:${cls==='ok'?'#4ade80':cls==='warn'?'#fb923c':cls==='conf'?'#60a5fa':'#f87171'};font-weight:800;">${st}</div>
         </div>
-        <div class="scan-time-badge">${dateStr}<br>${timeStr}</div>
+        <div class="scan-time-badge">${r.date || ''}<br>${safeStr(r.time)}</div>
       </div>`;
     }).join('');
   }
 
-  // ────────────────────────────────────────────────
-  function fetchJSONP(url, {timeoutMs=12000, retry=1} = {}) {
+  // ── JSONP ─────────────────────────────────────────
+  function fetchJSONP(url, { timeoutMs = 12000, retry = 1 } = {}) {
     return new Promise((resolve, reject) => {
-      const cb = 'cb_' + Date.now() + '_' + Math.floor(Math.random()*1000);
+      const cb = 'cb_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
       const script = document.createElement('script');
       script.async = true;
       let timer = null, finished = false;
 
-      function cleanup(){
-        if(timer) clearTimeout(timer);
-        try{ if(window[cb]) delete window[cb]; }catch(e){}
-        try{ if(script && script.parentNode) script.parentNode.removeChild(script); }catch(e){}
+      function cleanup() {
+        if (timer) clearTimeout(timer);
+        try { if (window[cb]) delete window[cb]; } catch(e) {}
+        try { if (script && script.parentNode) script.parentNode.removeChild(script); } catch(e) {}
       }
-      function fail(err){
-        if(finished) return;
+      function fail(err) {
+        if (finished) return;
         finished = true;
         cleanup();
-        if(retry > 0) return resolve(fetchJSONP(url, {timeoutMs, retry: retry-1}));
+        if (retry > 0) return resolve(fetchJSONP(url, { timeoutMs, retry: retry - 1 }));
         reject(err);
       }
-      window[cb] = (data)=>{
-        if(finished) return;
+      window[cb] = (data) => {
+        if (finished) return;
         finished = true;
         cleanup();
         resolve(data);
       };
-      timer = setTimeout(()=> fail(new Error('Timeout')), timeoutMs);
-      script.onerror = ()=> fail(new Error('Load error'));
-      script.src = url + (url.includes('?')?'&':'?') + 'callback=' + cb + '&t=' + Date.now();
+      timer = setTimeout(() => fail(new Error('Timeout')), timeoutMs);
+      script.onerror = () => fail(new Error('Load error'));
+      script.src = url + (url.includes('?') ? '&' : '?') + 'callback=' + cb + '&t=' + Date.now();
       document.head.appendChild(script);
     });
   }
 
-  function updateStatus(type, text){
+  // ── STATUS ────────────────────────────────────────
+  function updateStatus(type, text) {
     const s = document.getElementById('status');
     s.className = 'status status-' + type;
     s.textContent = text;
     const badge = document.getElementById('liveStatus');
-    const map = {scanning:'⏳ Yoxlanılır', success:'✓ Təsdiqləndi', warning:'⚠ Xəbərdarlıq', error:'✕ Xəta', waiting:'● Hazır'};
+    const map = { scanning: '⏳ Yoxlanılır', success: '✓ Təsdiqləndi', warning: '⚠ Xəbərdarlıq', error: '✕ Xəta', waiting: '● Hazır' };
     badge.textContent = map[type] || '● Hazır';
   }
 
-  const SCAN_STORAGE_KEY = 'ghg_scan_history';
-
-  function saveScanHistory(){
-    try{ localStorage.setItem(SCAN_STORAGE_KEY, JSON.stringify(scanHistory)); }catch(e){}
+  // ── SCAN HISTORY (localStorage) ───────────────────
+  function saveScanHistory() {
+    try { localStorage.setItem(SCAN_STORAGE_KEY, JSON.stringify(scanHistory)); } catch(e) {}
   }
-  function loadScanHistory(){
-    try{
+  function loadScanHistory() {
+    try {
       const raw = localStorage.getItem(SCAN_STORAGE_KEY);
-      if(raw) scanHistory = JSON.parse(raw);
-    }catch(e){ scanHistory = []; }
+      if (raw) scanHistory = JSON.parse(raw);
+    } catch(e) { scanHistory = []; }
   }
-  function renderScanList(){
+  function renderScanList() {
     const list = document.getElementById('scanList');
-    if(!scanHistory.length){
+    if (!scanHistory.length) {
       list.innerHTML = '<div class="empty-state">Hələ heç bir skan edilməyib</div>';
       return;
     }
-    list.innerHTML = scanHistory.map(scan=>{
-      let icon='✓', cls='ok';
-      if(scan.err){ icon='✕'; cls='err'; }
-      else if(scan.warn){ icon='⚠'; cls='warn'; }
+    list.innerHTML = scanHistory.map(scan => {
+      let icon = '✓', cls = 'ok';
+      if (scan.err) { icon = '✕'; cls = 'err'; }
+      else if (scan.warn) { icon = '⚠'; cls = 'warn'; }
       return `<div class="scan-item">
         <div class="scan-icon ${cls}">${icon}</div>
         <div class="scan-info">
           <div class="scan-name">${scan.name}</div>
-          <div class="scan-detail">${scan.id} ${scan.type ? '· '+scan.type : ''} · ${scan.msg}</div>
+          <div class="scan-detail">${scan.id} ${scan.type ? '· ' + scan.type : ''} · ${scan.msg}</div>
           <div class="scan-detail" style="margin-top:1px;">${scan.time}</div>
         </div>
       </div>`;
     }).join('');
   }
 
-  function addScan(item){
+  function addScan(item) {
     const time = new Date().toLocaleTimeString('az-AZ');
-    scanHistory.unshift({...item, time});
-    if(scanHistory.length > 15) scanHistory.pop();
+    scanHistory.unshift({ ...item, time });
+    if (scanHistory.length > 15) scanHistory.pop();
     saveScanHistory();
     renderScanList();
   }
 
-  function startCountdown(type){
-    if(countdownInterval){ clearInterval(countdownInterval); countdownInterval=null; }
+  // ── COUNTDOWN ─────────────────────────────────────
+  function startCountdown(type) {
+    if (countdownInterval) { clearInterval(countdownInterval); countdownInterval = null; }
     const el = document.getElementById('countdown');
     const tx = document.getElementById('countdownText');
-    el.className = 'countdown countdown-' + (type||'success');
+    el.className = 'countdown countdown-' + (type || 'success');
     el.style.display = 'block';
     tx.style.display = 'block';
     let s = COUNTDOWN_SECONDS;
     el.textContent = s;
-    countdownInterval = setInterval(()=>{
+    countdownInterval = setInterval(() => {
       s--;
       el.textContent = s;
-      if(s<=0){ clearInterval(countdownInterval); countdownInterval=null; hideResult(); }
+      if (s <= 0) { clearInterval(countdownInterval); countdownInterval = null; hideResult(); }
     }, 1000);
   }
 
-  function showResult({resultType, name, id, type, statusText, mode='auto', confirmToken=null}){
-    document.getElementById('countdown').style.display='none';
-    document.getElementById('countdownText').style.display='none';
-    if(countdownInterval){ clearInterval(countdownInterval); countdownInterval=null; }
+  // ── RESULT OVERLAY ────────────────────────────────
+  function showResult({ resultType, name, id, type, statusText, mode = 'auto', confirmToken = null }) {
+    document.getElementById('countdown').style.display = 'none';
+    document.getElementById('countdownText').style.display = 'none';
+    if (countdownInterval) { clearInterval(countdownInterval); countdownInterval = null; }
 
     const card = document.getElementById('resultCard');
     const icon = document.getElementById('resultIcon');
     const title = document.getElementById('resultTitle');
 
-    document.getElementById('detailName').textContent = name||'-';
-    document.getElementById('detailId').textContent = 'ID: ' + (id||'-');
-    document.getElementById('detailTicket').textContent = type||'-';
-    document.getElementById('detailStatus').textContent = statusText||'-';
+    document.getElementById('detailName').textContent = name || '-';
+    document.getElementById('detailId').textContent = 'ID: ' + (id || '-');
+    document.getElementById('detailTicket').textContent = type || '-';
+    document.getElementById('detailStatus').textContent = statusText || '-';
 
     card.className = 'result-card result-' + resultType;
+    pendingConfirmToken = confirmToken || null;
 
     const confirmBtn = document.getElementById('confirmBtn');
     const closeBtn = document.getElementById('closeBtn');
-    pendingConfirmToken = confirmToken||null;
 
-    confirmBtn.style.display='none';
-    confirmBtn.disabled=false;
-    confirmBtn.textContent='✅ Təsdiq et';
-    closeBtn.disabled=false;
-    closeBtn.style.opacity='1';
-    closeBtn.style.cursor='pointer';
+    confirmBtn.style.display = 'none';
+    confirmBtn.disabled = false;
+    confirmBtn.textContent = '✅ Təsdiq et';
+    closeBtn.disabled = false;
+    closeBtn.style.opacity = '1';
+    closeBtn.style.cursor = 'pointer';
 
-    if(resultType==='success'){
-      icon.textContent='✓'; title.textContent='Təsdiqləndi';
-      closeBtn.disabled=true; closeBtn.style.opacity='.5'; closeBtn.style.cursor='not-allowed';
-      if(mode==='auto') startCountdown('success');
-    } else if(resultType==='warning'){
-      icon.textContent='⚠'; title.textContent='Xəbərdarlıq';
-      closeBtn.disabled=true; closeBtn.style.opacity='.5'; closeBtn.style.cursor='not-allowed';
-      if(mode==='auto') startCountdown('warning');
-    } else if(resultType==='confirm'){
-      icon.textContent='?'; title.textContent='Təsdiq';
-      if(mode==='confirm') confirmBtn.style.display='block';
+    if (resultType === 'success') {
+      icon.textContent = '✓'; title.textContent = 'Təsdiqləndi';
+      closeBtn.disabled = true; closeBtn.style.opacity = '.5'; closeBtn.style.cursor = 'not-allowed';
+      if (mode === 'auto') startCountdown('success');
+    } else if (resultType === 'warning') {
+      icon.textContent = '⚠'; title.textContent = 'Xəbərdarlıq';
+      closeBtn.disabled = true; closeBtn.style.opacity = '.5'; closeBtn.style.cursor = 'not-allowed';
+      if (mode === 'auto') startCountdown('warning');
+    } else if (resultType === 'confirm') {
+      icon.textContent = '?'; title.textContent = 'Təsdiq';
+      if (mode === 'confirm') confirmBtn.style.display = 'block';
     } else {
-      icon.textContent='✕'; title.textContent='Xəta';
-      closeBtn.disabled=true; closeBtn.style.opacity='.5'; closeBtn.style.cursor='not-allowed';
-      if(mode==='auto') startCountdown('error');
+      icon.textContent = '✕'; title.textContent = 'Xəta';
+      closeBtn.disabled = true; closeBtn.style.opacity = '.5'; closeBtn.style.cursor = 'not-allowed';
+      if (mode === 'auto') startCountdown('error');
     }
 
-    document.getElementById('resultOverlay').style.display='flex';
+    document.getElementById('resultOverlay').style.display = 'flex';
   }
 
-  function hideResult(){
-    document.getElementById('resultOverlay').style.display='none';
+  function hideResult() {
+    document.getElementById('resultOverlay').style.display = 'none';
     isProcessing = false;
-    pendingConfirmToken=null;
-    pendingConfirmQrData=null;
-    pendingConfirmMeta=null;
-    document.getElementById('countdown').style.display='none';
-    document.getElementById('countdownText').style.display='none';
-    if(countdownInterval){ clearInterval(countdownInterval); countdownInterval=null; }
-    updateStatus('waiting','QR kod gözlənilir...');
+    pendingConfirmToken = null;
+    pendingConfirmQrData = null;
+    pendingConfirmMeta = null;
+    document.getElementById('countdown').style.display = 'none';
+    document.getElementById('countdownText').style.display = 'none';
+    if (countdownInterval) { clearInterval(countdownInterval); countdownInterval = null; }
+    updateStatus('waiting', 'QR kod gözlənilir...');
   }
 
-  // ────────────────────────────────────────────────
-  // ƏSAS DÜZƏLTMƏ: shouldBlock()
-  // Eyni QR üçün QR_BLOCK_MS (4000ms) keçənə qədər
-  // HEÇ BİR yeni scan qəbul edilmir.
-  // Bu server latency problemini tam həll edir.
-  // ────────────────────────────────────────────────
-  function shouldBlock(qrText){
+  // ── QR BLOCK ──────────────────────────────────────
+  function shouldBlock(qrText) {
     const now = Date.now();
-    if(qrText === lastQrText && (now - lastQrAt) < QR_BLOCK_MS) return true;
-    // Fərqli QR olsa belə, əgər əvvəlki process gedərsə blokla
-    if(isProcessing) return true;
+    if (qrText === lastQrText && (now - lastQrAt) < QR_BLOCK_MS) return true;
+    if (isProcessing) return true;
     lastQrText = qrText;
     lastQrAt = now;
     return false;
   }
 
-  function isDryQR(qrData){
-    const parts = String(qrData||'').split('|');
-    return parts[2]==='Q' || parts[5]==='dry' || String(qrData).includes('|Q|') || String(qrData).includes('|dry');
+  function isDryQR(qrData) {
+    const parts = String(qrData || '').split('|');
+    return parts[2] === 'Q' || parts[5] === 'dry' || String(qrData).includes('|Q|') || String(qrData).includes('|dry');
   }
 
-  function getDryCount(qrData){
+  function getDryCount(qrData) {
     const row = dryCountMap.get(qrData);
-    if(!row) return 0;
-    if(Date.now()-row.ts > DRY_TTL_MS){ dryCountMap.delete(qrData); return 0; }
-    return row.count||0;
+    if (!row) return 0;
+    if (Date.now() - row.ts > DRY_TTL_MS) { dryCountMap.delete(qrData); return 0; }
+    return row.count || 0;
   }
-  function setDryCount(qrData, count){
-    if(!qrData) return;
-    dryCountMap.set(qrData, {count, ts:Date.now()});
+  function setDryCount(qrData, count) {
+    if (!qrData) return;
+    dryCountMap.set(qrData, { count, ts: Date.now() });
   }
 
-  async function handleScan(qrData){
-    if(shouldBlock(qrData)) return;
+  // ── SCAN ──────────────────────────────────────────
+  async function handleScan(qrData) {
+    if (shouldBlock(qrData)) return;
     isProcessing = true;
+    updateStatus('scanning', 'Yoxlanılır...');
 
-    updateStatus('scanning','Yoxlanılır...');
-
-    try{
+    try {
       const res = await fetchJSONP(
-        `${SHEET_API_URL}?action=scanTicket&qrData=${encodeURIComponent(qrData)}`,
-        {timeoutMs:12000, retry:1}
+        SHEET_API_URL + '?action=scanTicket&qrData=' + encodeURIComponent(qrData),
+        { timeoutMs: 12000, retry: 1 }
       );
 
-      // Server cavabı gəldikdən sonra lastQrAt-i yenilə
-      // Beləliklə overlay bağlanandan sonra da 4s keçənə qədər eyni QR bloklanır
       lastQrAt = Date.now();
 
-      const name = res.data?.adSoyad||'-';
-      const id = res.data?.empId||'-';
-      const ticketType = res.data?.ticketType||(isDryQR(qrData)?'Quru Talon':'-');
-      const isDry = isDryQR(qrData)||String(ticketType).toLowerCase().includes('quru');
+      const name = res.data?.adSoyad || '-';
+      const id = res.data?.empId || '-';
+      const ticketType = res.data?.ticketType || (isDryQR(qrData) ? 'Quru Talon' : '-');
+      const isDry = isDryQR(qrData) || String(ticketType).toLowerCase().includes('quru');
 
-      if(isDry){
+      if (isDry) {
         const c = getDryCount(qrData);
-        if(c >= 2){
-          updateStatus('warning','Təkrar cəhd');
-          addScan({name,id,type:'Quru Talon',msg:'Təkrar cəhd',warn:true,err:false});
-          showResult({resultType:'warning',name,id,type:'Quru Talon',statusText:'Təkrar cəhd',mode:'auto'});
+        if (c >= 2) {
+          updateStatus('warning', 'Təkrar cəhd');
+          addScan({ name, id, type: 'Quru Talon', msg: 'Təkrar cəhd', warn: true, err: false });
+          showResult({ resultType: 'warning', name, id, type: 'Quru Talon', statusText: 'Təkrar cəhd', mode: 'auto' });
           return;
         }
-        if(c === 1){
-          const token = res.token||res.confirmToken||res.data?.token||res.data?.confirmToken||null;
-          pendingConfirmQrData=qrData;
-          pendingConfirmMeta={name,id,type:'Quru Talon'};
-          pendingConfirmToken=token;
-          updateStatus('warning','Təsdiq');
-          addScan({name,id,type:'Quru Talon',msg:'Təsdiq et (2-ci scan)',warn:true,err:false});
-          showResult({resultType:'confirm',name,id,type:'Quru Talon',statusText:'✅ Təsdiq et düyməsinə basın',mode:'confirm',confirmToken:token});
+        if (c === 1) {
+          const token = res.token || res.confirmToken || res.data?.token || res.data?.confirmToken || null;
+          pendingConfirmQrData = qrData;
+          pendingConfirmMeta = { name, id, type: 'Quru Talon' };
+          pendingConfirmToken = token;
+          updateStatus('warning', 'Təsdiq');
+          addScan({ name, id, type: 'Quru Talon', msg: 'Təsdiq et (2-ci scan)', warn: true, err: false });
+          showResult({ resultType: 'confirm', name, id, type: 'Quru Talon', statusText: '✅ Təsdiq et düyməsinə basın', mode: 'confirm', confirmToken: token });
           return;
         }
         setDryCount(qrData, 1);
       }
 
-      if(res.status==='success'){
-        updateStatus('success',res.message||'Təsdiqləndi');
-        addScan({name,id,type:ticketType,msg:res.message||'Təsdiqləndi',warn:false,err:false});
-        showResult({resultType:'success',name,id,type:ticketType,statusText:res.message||'Təsdiqləndi',mode:'auto'});
+      if (res.status === 'success') {
+        updateStatus('success', res.message || 'Təsdiqləndi');
+        addScan({ name, id, type: ticketType, msg: res.message || 'Təsdiqləndi', warn: false, err: false });
+        showResult({ resultType: 'success', name, id, type: ticketType, statusText: res.message || 'Təsdiqləndi', mode: 'auto' });
         return;
       }
-      if(res.status==='warning'){
-        updateStatus('warning',res.message||'Xəbərdarlıq');
-        addScan({name,id,type:ticketType,msg:res.message||'Xəbərdarlıq',warn:true,err:false});
-        showResult({resultType:'warning',name,id,type:ticketType,statusText:res.message||'Xəbərdarlıq',mode:'auto'});
+      if (res.status === 'warning') {
+        updateStatus('warning', res.message || 'Xəbərdarlıq');
+        addScan({ name, id, type: ticketType, msg: res.message || 'Xəbərdarlıq', warn: true, err: false });
+        showResult({ resultType: 'warning', name, id, type: ticketType, statusText: res.message || 'Xəbərdarlıq', mode: 'auto' });
         return;
       }
-      if(res.status==='confirm'){
-        const token = res.token||res.confirmToken||res.data?.token||res.data?.confirmToken||null;
-        pendingConfirmQrData=qrData;
-        pendingConfirmMeta={name,id,type:ticketType};
-        pendingConfirmToken=token;
-        addScan({name,id,type:ticketType,msg:res.message||'Təsdiq tələb olunur',warn:true,err:false});
-        showResult({resultType:'confirm',name,id,type:ticketType,statusText:res.message||'Təsdiq tələb olunur',mode:'confirm',confirmToken:token});
+      if (res.status === 'confirm') {
+        const token = res.token || res.confirmToken || res.data?.token || res.data?.confirmToken || null;
+        pendingConfirmQrData = qrData;
+        pendingConfirmMeta = { name, id, type: ticketType };
+        pendingConfirmToken = token;
+        addScan({ name, id, type: ticketType, msg: res.message || 'Təsdiq tələb olunur', warn: true, err: false });
+        showResult({ resultType: 'confirm', name, id, type: ticketType, statusText: res.message || 'Təsdiq tələb olunur', mode: 'confirm', confirmToken: token });
         return;
       }
 
-      updateStatus('error',res.message||'Xəta');
-      addScan({name:'Xəta',id:'-',type:'-',msg:res.message||'Xəta',err:true});
-      showResult({resultType:'error',name:'Xəta',id:'-',type:'-',statusText:res.message||'Xəta',mode:'auto'});
+      updateStatus('error', res.message || 'Xəta');
+      addScan({ name: 'Xəta', id: '-', type: '-', msg: res.message || 'Xəta', err: true });
+      showResult({ resultType: 'error', name: 'Xəta', id: '-', type: '-', statusText: res.message || 'Xəta', mode: 'auto' });
 
-    }catch(e){
-      // Xəta olsa belə bloku tez burax, amma yenə 2s saxla
+    } catch(e) {
       lastQrAt = Date.now() - (QR_BLOCK_MS - 2000);
-      updateStatus('error','Serverə qoşulmadı');
-      addScan({name:'Bağlantı xətası',id:'-',type:'-',msg:'Serverə qoşulmadı',err:true});
-      showResult({resultType:'error',name:'Bağlantı xətası',id:'-',type:'-',statusText:'Serverə qoşulmadı',mode:'auto'});
+      updateStatus('error', 'Serverə qoşulmadı');
+      addScan({ name: 'Bağlantı xətası', id: '-', type: '-', msg: 'Serverə qoşulmadı', err: true });
+      showResult({ resultType: 'error', name: 'Bağlantı xətası', id: '-', type: '-', statusText: 'Serverə qoşulmadı', mode: 'auto' });
     }
   }
 
   document.getElementById('confirmBtn').onclick = async () => {
     const btn = document.getElementById('confirmBtn');
-    if(!pendingConfirmQrData) return;
-    btn.disabled=true;
-    btn.textContent='Göndərilir...';
-
-    const meta = pendingConfirmMeta||{name:'-',id:'-',type:'Quru Talon'};
+    if (!pendingConfirmQrData) return;
+    btn.disabled = true;
+    btn.textContent = 'Göndərilir...';
+    const meta = pendingConfirmMeta || { name: '-', id: '-', type: 'Quru Talon' };
     const qrData = pendingConfirmQrData;
-    const token = pendingConfirmToken||'';
-
-    try{
-      const url = `${SHEET_API_URL}?action=confirmDrySecond&token=${encodeURIComponent(token)}&confirmToken=${encodeURIComponent(token)}&qrData=${encodeURIComponent(qrData)}`;
-      const res = await fetchJSONP(url,{timeoutMs:12000,retry:1});
-
-      if(res&&(res.status==='error'||res.status==='failed')){
-        updateStatus('error',res.message||'Təsdiq alınmadı');
-        addScan({name:meta.name,id:meta.id,type:meta.type,msg:res.message||'Təsdiq alınmadı',err:true});
-        showResult({resultType:'error',name:meta.name,id:meta.id,type:meta.type,statusText:res.message||'Təsdiq alınmadı',mode:'auto'});
+    const token = pendingConfirmToken || '';
+    try {
+      const url = SHEET_API_URL + '?action=confirmDrySecond&token=' + encodeURIComponent(token) + '&confirmToken=' + encodeURIComponent(token) + '&qrData=' + encodeURIComponent(qrData);
+      const res = await fetchJSONP(url, { timeoutMs: 12000, retry: 1 });
+      if (res && (res.status === 'error' || res.status === 'failed')) {
+        updateStatus('error', res.message || 'Təsdiq alınmadı');
+        addScan({ name: meta.name, id: meta.id, type: meta.type, msg: res.message || 'Təsdiq alınmadı', err: true });
+        showResult({ resultType: 'error', name: meta.name, id: meta.id, type: meta.type, statusText: res.message || 'Təsdiq alınmadı', mode: 'auto' });
         return;
       }
-
       setDryCount(qrData, 2);
-      updateStatus('success','Təsdiq');
-      addScan({name:res?.data?.adSoyad||meta.name,id:res?.data?.empId||meta.id,type:res?.data?.ticketType||meta.type,msg:res?.message||'Təsdiq',warn:false,err:false});
-      showResult({resultType:'success',name:res?.data?.adSoyad||meta.name,id:res?.data?.empId||meta.id,type:res?.data?.ticketType||meta.type,statusText:res?.message||'Təsdiq ✅',mode:'auto'});
-
-    }catch(e){
-      updateStatus('error','Təsdiq göndərilmədi');
-      addScan({name:meta.name,id:meta.id,type:meta.type,msg:'Təsdiq göndərilmədi',err:true});
-      showResult({resultType:'error',name:meta.name,id:meta.id,type:meta.type,statusText:'Təsdiq göndərilmədi',mode:'auto'});
-    }finally{
-      btn.textContent='Göndərildi ✅';
+      updateStatus('success', 'Təsdiq');
+      addScan({ name: res?.data?.adSoyad || meta.name, id: res?.data?.empId || meta.id, type: res?.data?.ticketType || meta.type, msg: res?.message || 'Təsdiq', warn: false, err: false });
+      showResult({ resultType: 'success', name: res?.data?.adSoyad || meta.name, id: res?.data?.empId || meta.id, type: res?.data?.ticketType || meta.type, statusText: res?.message || 'Təsdiq ✅', mode: 'auto' });
+    } catch(e) {
+      updateStatus('error', 'Təsdiq göndərilmədi');
+      addScan({ name: meta.name, id: meta.id, type: meta.type, msg: 'Təsdiq göndərilmədi', err: true });
+      showResult({ resultType: 'error', name: meta.name, id: meta.id, type: meta.type, statusText: 'Təsdiq göndərilmədi', mode: 'auto' });
+    } finally {
+      btn.textContent = 'Göndərildi ✅';
     }
   };
 
-  document.getElementById('closeBtn').onclick = ()=>{
-    if(document.getElementById('closeBtn').disabled) return;
-    if(countdownInterval){ clearInterval(countdownInterval); countdownInterval=null; }
+  document.getElementById('closeBtn').onclick = () => {
+    if (document.getElementById('closeBtn').disabled) return;
+    if (countdownInterval) { clearInterval(countdownInterval); countdownInterval = null; }
     hideResult();
   };
 
-  function startCamera(){
+  function startCamera() {
     html5QrCode = new Html5Qrcode("reader");
     html5QrCode.start(
-      {facingMode:"environment"},
-      {fps:10, qrbox:{width:240,height:240}, disableFlip:true},
-      (text)=>{ handleScan(text); },
-      ()=>{}
-    ).catch(err=>{
-      updateStatus('error','Kamera açılmadı!');
+      { facingMode: "environment" },
+      { fps: 10, qrbox: { width: 240, height: 240 }, disableFlip: true },
+      (text) => { handleScan(text); },
+      () => {}
+    ).catch(err => {
+      updateStatus('error', 'Kamera açılmadı!');
     });
   }
 
   window.onload = () => {
-    checkIPAccess();
+    checkDeviceAccess();
   };
 
-  async function checkIPAccess() {
-    try {
-      // İstifadəçinin real IP-sini öyrən
-      const ipRes = await fetch('https://api.ipify.org?format=json');
-      const ipData = await ipRes.json();
-      const myIP = (ipData.ip || '').trim();
-
-      document.getElementById('myIpDisplay').textContent = 'IP: ' + myIP;
-
-      // Sheet-dən icazəli IP-ləri al
-      const res = await fetchJSONP(
-        SHEET_API_URL + '?action=getAllowedIPs',
-        { timeoutMs: 10000, retry: 1 }
-      );
-
-      if (res && res.status === 'success' && Array.isArray(res.ips)) {
-        const allowed = res.ips.map(ip => ip.trim());
-
-        // Siyahı boşdursa - hamıya icazə ver
-        if (allowed.length === 0) {
-          startApp();
-          return;
-        }
-
-        if (allowed.includes(myIP)) {
-          startApp();
-        } else {
-          document.getElementById('ipBlock').classList.add('show');
-          updateStatus('error', 'Giriş qadağandır');
-        }
-      } else {
-        // API xətası - ehtiyatlı tərəfdən icazə ver
-        startApp();
-      }
-    } catch(e) {
-      // Şəbəkə xətası - ehtiyatlı tərəfdən icazə ver
-      startApp();
-    }
-  }
-
-  function startApp() {
-    loadScanHistory();
-    renderScanList();
-    startCamera();
-  }
-  window.onbeforeunload = ()=>{
-    try{ if(html5QrCode) html5QrCode.stop(); }catch(e){}
-    if(countdownInterval) clearInterval(countdownInterval);
+  window.onbeforeunload = () => {
+    try { if (html5QrCode) html5QrCode.stop(); } catch(e) {}
+    if (countdownInterval) clearInterval(countdownInterval);
   };
 </script>
-
-<!-- IP BLOK EKRANI -->
-<div class="ip-block" id="ipBlock">
-  <div class="ip-block-icon">🚫</div>
-  <div class="ip-block-title">Giriş icazəniz yoxdur!</div>
-  <div class="ip-block-msg">Bu cihazın IP ünvanı icazə siyahısında deyil.<br>Zəhmət olmasa sistem administratorə müraciət edin.</div>
-  <div class="ip-block-code" id="myIpDisplay"></div>
-</div>
-
 </body>
 </html>
