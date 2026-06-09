@@ -700,8 +700,27 @@
   }
 
   // ── SCAN ──────────────────────────────────────────
+  function isLunchQR(qrData) {
+    const parts = String(qrData || '').split('|');
+    return parts[2] === 'G' || parts[5] === 'lunch';
+  }
+
+  function isLunchTimeExpired() {
+    return new Date().getHours() >= 15;
+  }
+
   async function handleScan(qrData) {
     if (shouldBlock(qrData)) return;
+
+    if (isLunchQR(qrData) && isLunchTimeExpired()) {
+      isProcessing = true;
+      lastQrAt = Date.now();
+      updateStatus('error', 'Günorta talonu bağlanıb (15:00)');
+      addScan({ name: 'Günorta Yeməyi', id: '-', type: 'Günorta Yeməyi', msg: 'Saat 15:00-dan sonra qəbul edilmir', err: true });
+      showResult({ resultType: 'error', name: 'Günorta Yeməyi', id: '-', type: 'Günorta Yeməyi', statusText: '⛔ Saat 15:00-dan sonra günorta talonu qəbul edilmir', mode: 'auto' });
+      return;
+    }
+
     isProcessing = true;
     updateStatus('scanning', 'Yoxlanılır...');
 
