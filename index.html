@@ -227,6 +227,7 @@
   let lastQrText = '';
   let lastQrAt = 0;
   const dryCountMap = new Map();
+  const sentQRMap = new Map(); // server-ə göndərilən QR-lər 60s bloklanır
   let currentTab = 'scanner';
   let currentFilter = 'today';
 
@@ -678,6 +679,8 @@
     const now = Date.now();
     if (qrText === lastQrText && (now - lastQrAt) < QR_BLOCK_MS) return true;
     if (isProcessing) return true;
+    const sentAt = sentQRMap.get(qrText);
+    if (sentAt && (now - sentAt) < 60000) return true; // server-ə göndərilib, 60s blok
     lastQrText = qrText;
     lastQrAt = now;
     return false;
@@ -722,6 +725,7 @@
     }
 
     isProcessing = true;
+    sentQRMap.set(qrData, Date.now()); // server-ə göndərildi, blokla
     updateStatus('scanning', 'Yoxlanılır...');
 
     try {
@@ -786,6 +790,7 @@
 
     } catch(e) {
       lastQrAt = Date.now() - (QR_BLOCK_MS - 2000);
+      sentQRMap.delete(qrData); // şəbəkə xətasında bloku sıfırla, yenidən cəhd mümkün olsun
       updateStatus('error', 'Serverə qoşulmadı');
       addScan({ name: 'Bağlantı xətası', id: '-', type: '-', msg: 'Serverə qoşulmadı', err: true });
       showResult({ resultType: 'error', name: 'Bağlantı xətası', id: '-', type: '-', statusText: 'Serverə qoşulmadı', mode: 'auto' });
