@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" rx="40" fill="#0f2a55"/>
+  <!-- Hexagon -->
+  <polygon points="100,18 168,58 168,138 100,178 32,138 32,58" fill="none" stroke="#ffffff" stroke-width="8"/>
+  <!-- G left -->
+  <text x="38" y="118" font-family="Arial Black,sans-serif" font-weight="900" font-size="52" fill="#ffffff">G</text>
+  <!-- H center -->
+  <text x="74" y="118" font-family="Arial Black,sans-serif" font-weight="900" font-size="52" fill="#ffffff">H</text>
+  <!-- G right -->
+  <text x="118" y="118" font-family="Arial Black,sans-serif" font-weight="900" font-size="52" fill="#ffffff">G</text>
+</svg>

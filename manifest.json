@@ -1,0 +1,13 @@
+{
+  "name": "GHG Yemək Skaner",
+  "short_name": "GHG Skaner",
+  "description": "GHG Yemək Talon Skaner",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d1117",
+  "theme_color": "#0f2a55",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "logo.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
