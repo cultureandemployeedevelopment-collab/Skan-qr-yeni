@@ -239,6 +239,7 @@
   let lastQrAt = 0;
   const dryCountMap = new Map();
   const sentQRMap = new Map(); // server-ə göndərilən QR-lər 60s bloklanır
+  const confirmedQRMap = new Map(); // server uğurlu cavab verən QR-lər
   let currentTab = 'scanner';
   let currentFilter = 'today';
 
@@ -789,8 +790,8 @@
 
   async function handleScan(qrData) {
     if (shouldBlock(qrData)) {
-      const sentAt = sentQRMap.get(qrData);
-      if (sentAt && (Date.now() - sentAt) < 60000) {
+      const confirmedAt = confirmedQRMap.get(qrData);
+      if (confirmedAt && (Date.now() - confirmedAt) < 60000) {
         updateStatus('success', '✓ Artıq qeydə alınıb');
       }
       return;
@@ -846,6 +847,7 @@
       }
 
       if (res.status === 'success') {
+        confirmedQRMap.set(qrData, Date.now());
         feedbackSuccess();
         updateStatus('success', res.message || 'Təsdiqləndi');
         addScan({ name, id, type: ticketType, msg: res.message || 'Təsdiqləndi', warn: false, err: false });
@@ -853,6 +855,7 @@
         return;
       }
       if (res.status === 'warning') {
+        confirmedQRMap.set(qrData, Date.now());
         feedbackWarning();
         updateStatus('warning', res.message || 'Xəbərdarlıq');
         addScan({ name, id, type: ticketType, msg: res.message || 'Xəbərdarlıq', warn: true, err: false });
