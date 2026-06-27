@@ -226,6 +226,7 @@
   const DRY_TTL_MS = 24 * 60 * 60 * 1000;
   const SCAN_STORAGE_KEY = 'ghg_scan_history';
   const DEVICE_ID_KEY = 'ghg_device_id';
+  const OFFLINE_QUEUE_KEY = 'ghg_offline_queue';
 
   let isProcessing = false;
   let scanHistory = [];
@@ -389,6 +390,7 @@
     renderScanList();
     startCamera();
     updateStatus('waiting', 'QR kod gözlənilir...');
+    flushOfflineQueue();
   }
 
   // ── TAB ───────────────────────────────────────────
@@ -399,7 +401,7 @@
     document.querySelectorAll('.tab').forEach((t, i) => {
       t.classList.toggle('active', (i === 0 && tab === 'scanner') || (i === 1 && tab === 'history'));
     });
-    if (tab === 'history') initHistoryDates();
+    if (tab === 'history') { initHistoryDates(); loadHistory(); }
   }
 
   function setFilter(f) {
@@ -684,13 +686,76 @@
     updateStatus('waiting', 'QR kod gözlənilir...');
   }
 
+  // ── SƏS / VİBRASİYA FEEDBACK ──────────────────────
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  function playTone(freq, duration, type = 'sine') {
+    try {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.value = freq;
+      gain.gain.value = 0.3;
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+      osc.stop(audioCtx.currentTime + duration);
+    } catch(e) {}
+  }
+  function feedbackSuccess() {
+    playTone(880, 0.15);
+    setTimeout(() => playTone(1100, 0.2), 150);
+    try { navigator.vibrate?.([100, 50, 100]); } catch(e) {}
+  }
+  function feedbackWarning() {
+    playTone(440, 0.3, 'triangle');
+    try { navigator.vibrate?.([200, 100, 200]); } catch(e) {}
+  }
+  function feedbackError() {
+    playTone(220, 0.4, 'square');
+    try { navigator.vibrate?.([400]); } catch(e) {}
+  }
+
+  // ── OFFLİNE REJİM ────────────────────────────────
+  function getOfflineQueue() {
+    try { return JSON.parse(localStorage.getItem(OFFLINE_QUEUE_KEY) || '[]'); } catch(e) { return []; }
+  }
+  function saveOfflineQueue(queue) {
+    try { localStorage.setItem(OFFLINE_QUEUE_KEY, JSON.stringify(queue)); } catch(e) {}
+  }
+  function addToOfflineQueue(qrData) {
+    const queue = getOfflineQueue();
+    queue.push({ qrData, timestamp: Date.now() });
+    saveOfflineQueue(queue);
+  }
+  async function flushOfflineQueue() {
+    const queue = getOfflineQueue();
+    if (!queue.length) return;
+    const remaining = [];
+    for (const item of queue) {
+      try {
+        await fetchJSONP(
+          SHEET_API_URL + '?action=scanTicket&qrData=' + encodeURIComponent(item.qrData),
+          { timeoutMs: 10000, retry: 0 }
+        );
+      } catch(e) {
+        remaining.push(item);
+      }
+    }
+    saveOfflineQueue(remaining);
+    if (remaining.length === 0 && queue.length > 0) {
+      updateStatus('success', '✓ Offline skanlar göndərildi (' + queue.length + ')');
+    }
+  }
+  window.addEventListener('online', () => { flushOfflineQueue(); });
+
   // ── QR BLOCK ──────────────────────────────────────
   function shouldBlock(qrText) {
     const now = Date.now();
     if (qrText === lastQrText && (now - lastQrAt) < QR_BLOCK_MS) return true;
-    if (isProcessing) return true;
     const sentAt = sentQRMap.get(qrText);
-    if (sentAt && (now - sentAt) < 60000) return true; // server-ə göndərilib, 60s blok
+    if (sentAt && (now - sentAt) < 60000) return true;
+    if (isProcessing) return true;
     lastQrText = qrText;
     lastQrAt = now;
     return false;
@@ -734,6 +799,7 @@
     if (isLunchQR(qrData) && isLunchTimeExpired()) {
       isProcessing = true;
       lastQrAt = Date.now();
+      feedbackError();
       updateStatus('error', 'Günorta talonu bağlanıb (15:00)');
       addScan({ name: 'Günorta Yeməyi', id: '-', type: 'Günorta Yeməyi', msg: 'Saat 15:00-dan sonra qəbul edilmir', err: true });
       showResult({ resultType: 'error', name: 'Günorta Yeməyi', id: '-', type: 'Günorta Yeməyi', statusText: '⛔ Saat 15:00-dan sonra günorta talonu qəbul edilmir', mode: 'auto' });
@@ -760,6 +826,7 @@
       if (isDry) {
         const c = getDryCount(qrData);
         if (c >= 2) {
+          feedbackWarning();
           updateStatus('warning', 'Təkrar cəhd');
           addScan({ name, id, type: 'Quru Talon', msg: 'Təkrar cəhd', warn: true, err: false });
           showResult({ resultType: 'warning', name, id, type: 'Quru Talon', statusText: 'Təkrar cəhd', mode: 'auto' });
@@ -779,12 +846,14 @@
       }
 
       if (res.status === 'success') {
+        feedbackSuccess();
         updateStatus('success', res.message || 'Təsdiqləndi');
         addScan({ name, id, type: ticketType, msg: res.message || 'Təsdiqləndi', warn: false, err: false });
         showResult({ resultType: 'success', name, id, type: ticketType, statusText: res.message || 'Təsdiqləndi', mode: 'auto' });
         return;
       }
       if (res.status === 'warning') {
+        feedbackWarning();
         updateStatus('warning', res.message || 'Xəbərdarlıq');
         addScan({ name, id, type: ticketType, msg: res.message || 'Xəbərdarlıq', warn: true, err: false });
         showResult({ resultType: 'warning', name, id, type: ticketType, statusText: res.message || 'Xəbərdarlıq', mode: 'auto' });
@@ -800,16 +869,19 @@
         return;
       }
 
+      feedbackError();
       updateStatus('error', res.message || 'Xəta');
       addScan({ name: 'Xəta', id: '-', type: '-', msg: res.message || 'Xəta', err: true });
       showResult({ resultType: 'error', name: 'Xəta', id: '-', type: '-', statusText: res.message || 'Xəta', mode: 'auto' });
 
     } catch(e) {
       lastQrAt = Date.now() - (QR_BLOCK_MS - 2000);
-      sentQRMap.delete(qrData); // şəbəkə xətasında bloku sıfırla, yenidən cəhd mümkün olsun
-      updateStatus('error', 'Serverə qoşulmadı');
-      addScan({ name: 'Bağlantı xətası', id: '-', type: '-', msg: 'Serverə qoşulmadı', err: true });
-      showResult({ resultType: 'error', name: 'Bağlantı xətası', id: '-', type: '-', statusText: 'Serverə qoşulmadı', mode: 'auto' });
+      sentQRMap.delete(qrData);
+      feedbackError();
+      addToOfflineQueue(qrData);
+      updateStatus('warning', '📴 Offline saxlanıldı — bağlantı qayıdanda göndəriləcək');
+      addScan({ name: 'Offline skan', id: '-', type: '-', msg: 'Bağlantı yoxdur, növbəyə əlavə edildi', warn: true });
+      showResult({ resultType: 'warning', name: 'Offline skan', id: '-', type: '-', statusText: '📴 Bağlantı yoxdur — skan saxlanıldı, internet qayıdanda göndəriləcək', mode: 'auto' });
     }
   }
 
