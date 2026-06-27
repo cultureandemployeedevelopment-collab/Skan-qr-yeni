@@ -723,7 +723,13 @@
   }
 
   async function handleScan(qrData) {
-    if (shouldBlock(qrData)) return;
+    if (shouldBlock(qrData)) {
+      const sentAt = sentQRMap.get(qrData);
+      if (sentAt && (Date.now() - sentAt) < 60000) {
+        updateStatus('success', '✓ Artıq qeydə alınıb');
+      }
+      return;
+    }
 
     if (isLunchQR(qrData) && isLunchTimeExpired()) {
       isProcessing = true;
