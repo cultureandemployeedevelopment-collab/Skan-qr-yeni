@@ -793,6 +793,7 @@
       const confirmedAt = confirmedQRMap.get(qrData);
       if (confirmedAt && (Date.now() - confirmedAt) < 60000) {
         updateStatus('success', '✓ Artıq qeydə alınıb');
+        setTimeout(() => { updateStatus('waiting', 'QR kod gözlənilir...'); }, 2000);
       }
       return;
     }
