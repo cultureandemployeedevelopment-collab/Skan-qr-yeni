@@ -815,7 +815,7 @@
     try {
       const res = await fetchJSONP(
         SHEET_API_URL + '?action=scanTicket&qrData=' + encodeURIComponent(qrData),
-        { timeoutMs: 12000, retry: 1 }
+        { timeoutMs: 12000, retry: 0 }
       );
 
       lastQrAt = Date.now();
