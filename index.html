@@ -742,7 +742,8 @@
       }
       try {
         await fetchJSONP(
-          SHEET_API_URL + '?action=scanTicket&qrData=' + encodeURIComponent(item.qrData),
+          SHEET_API_URL + '?action=scanTicket&qrData=' + encodeURIComponent(item.qrData) +
+            '&clientScanTime=' + encodeURIComponent(new Date(item.timestamp).toISOString()),
           { timeoutMs: 10000, retry: 0 }
         );
         sentCount++;
