@@ -733,19 +733,28 @@
     const queue = getOfflineQueue();
     if (!queue.length) return;
     const remaining = [];
+    let sentCount = 0;
+    let expiredCount = 0;
     for (const item of queue) {
+      if (isLunchQR(item.qrData) && isLunchTimeExpired()) {
+        expiredCount++;
+        continue;
+      }
       try {
         await fetchJSONP(
           SHEET_API_URL + '?action=scanTicket&qrData=' + encodeURIComponent(item.qrData),
           { timeoutMs: 10000, retry: 0 }
         );
+        sentCount++;
       } catch(e) {
         remaining.push(item);
       }
     }
     saveOfflineQueue(remaining);
-    if (remaining.length === 0 && queue.length > 0) {
-      updateStatus('success', '✓ Offline skanlar göndərildi (' + queue.length + ')');
+    if (sentCount > 0 && remaining.length === 0) {
+      updateStatus('success', '✓ Offline skanlar göndərildi (' + sentCount + ')');
+    } else if (expiredCount > 0 && sentCount === 0 && remaining.length === 0) {
+      updateStatus('warning', '⚠ Vaxtı bitmiş günorta skanları silindi (' + expiredCount + ')');
     }
   }
   window.addEventListener('online', () => { flushOfflineQueue(); });
